@@ -1,11 +1,9 @@
 
-Wholesaler’s University Ai Calculator — with OG image
+Wholesaler’s University Ai Calculator — Updated with transparent header logo and OG image.
 
-Files included:
-- index.html (with Open Graph + Twitter meta)
-- og-image.jpg
-- Transperant_Full_Logo.png (header logo)
-- Logo.png (favicon)
+Files:
+- index.html (uses 'Untitled design (1).png' as header and 'Logo.png' as favicon)
+- og-image.jpg (social share image)
 - privacy.html, terms.html
 - vercel.json
 

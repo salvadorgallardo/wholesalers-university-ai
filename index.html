@@ -21,17 +21,10 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-:root {
-  --text:#ffffff; --muted:#e5e7eb;
-  --accent:#C5E26A; --accentHover:#A8C75C;
-  --panel:#0a0a0a; --border:#2a2f36;
-}
+:root { --text:#ffffff; --muted:#e5e7eb; --accent:#C5E26A; --accentHover:#A8C75C; --panel:#0a0a0a; --border:#2a2f36; }
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%;color:var(--text);font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-body{
-  background-image:url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?fm=jpg&q=60&w=3000');
-  background-size:cover;background-position:center;background-attachment:fixed;
-}
+body{ background-image:url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?fm=jpg&q=60&w=3000'); background-size:cover;background-position:center;background-attachment:fixed; }
 .wrapper{min-height:100svh;display:grid;place-items:center;padding:28px}
 .container{width:min(900px,92vw);margin:0 auto}
 .hero{text-align:center;margin-bottom:16px}
@@ -66,7 +59,7 @@ footer a:hover{color:#111;background:var(--accent);padding:0 4px;border-radius:6
 <div class="wrapper">
   <div class="container">
     <div class="hero">
-      <img src="Transperant_Full_Logo.png" alt="Wholesaler’s University" class="logo"/>
+      <img src="Untitled design (1).png" alt="Wholesaler’s University" class="logo"/>
       <h1>Wholesaler’s University Ai Calculator</h1>
       <p class="tag">Cash • Creative Finance • Vacant Land • Zillow</p>
     </div>
@@ -113,26 +106,11 @@ footer a:hover{color:#111;background:var(--accent);padding:0 4px;border-radius:6
           <h4>Max Offer</h4>
           <div id="cr_offer" class="v">$0</div>
           <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:10px">
-            <div class="pill" style="background:#0e0e0e;border:1px solid var(--border);border-radius:12px;padding:10px">
-              <b style="display:block;font-size:12px;color:#e5e7eb;margin-bottom:4px">Purchase Price</b>
-              <div id="cr_price" class="val" style="font-size:18px;font-weight:800">$0</div>
-            </div>
-            <div class="pill" style="background:#0e0e0e;border:1px solid var(--border);border-radius:12px;padding:10px">
-              <b style="display:block;font-size:12px;color:#e5e7eb;margin-bottom:4px">Down Payment (10%)</b>
-              <div id="cr_down" class="val" style="font-size:18px;font-weight:800">$0</div>
-            </div>
-            <div class="pill" style="background:#0e0e0e;border:1px solid var(--border);border-radius:12px;padding:10px">
-              <b style="display:block;font-size:12px;color:#e5e7eb;margin-bottom:4px">Financed Amount</b>
-              <div id="cr_financed" class="val" style="font-size:18px;font-weight:800">$0</div>
-            </div>
-            <div class="pill" style="background:#0e0e0e;border:1px solid var(--border);border-radius:12px;padding:10px">
-              <b style="display:block;font-size:12px;color:#e5e7eb;margin-bottom:4px">Monthly Payment</b>
-              <div id="cr_pmt" class="val" style="font-size:18px;font-weight:800">$0</div>
-            </div>
-            <div class="pill" style="background:#0e0e0e;border:1px solid var(--border);border-radius:12px;padding:10px">
-              <b style="display:block;font-size:12px;color:#e5e7eb;margin-bottom:4px">Term</b>
-              <div id="cr_term" class="val" style="font-size:18px;font-weight:800">30 yr amort • 10 yr balloon @ 2%</div>
-            </div>
+            <div><b>Purchase Price</b><div id="cr_price" class="v">$0</div></div>
+            <div><b>Down Payment (10%)</b><div id="cr_down" class="v">$0</div></div>
+            <div><b>Financed Amount</b><div id="cr_financed" class="v">$0</div></div>
+            <div><b>Monthly Payment</b><div id="cr_pmt" class="v">$0</div></div>
+            <div><b>Term</b><div id="cr_term" class="v">30 yr amort • 10 yr balloon @ 2%</div></div>
           </div>
         </div>
       </section>
@@ -177,43 +155,49 @@ footer a:hover{color:#111;background:var(--accent);padding:0 4px;border-radius:6
     </footer>
   </div>
 </div>
+
 <script>
 document.getElementById('yr').textContent = new Date().getFullYear();
 const $ = sel => document.querySelector(sel);
 const num = v => { const n = parseFloat(v); return Number.isFinite(n) ? n : 0; };
 const fmt = n => '$' + (Math.round((n??0)*100)/100).toLocaleString();
+
+// Tabs
 document.querySelectorAll('.tab').forEach(btn=>btn.onclick = ()=>{
   document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
   document.querySelectorAll('section.calc').forEach(s=>s.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById(btn.dataset.tab).classList.add('active');
 });
-function calcCash(){const ARV = num($('#c_ARV').value);const rehab = num($('#c_Rehab').value);const AF = Math.max(0, num($('#c_AF').value));const mo = (ARV * 0.70) - rehab - AF;$('#c_offer').textContent = fmt(mo);$('#c_result').style.display = 'block';}
-$('#c_calc').onclick = calcCash; $('#c_clear').onclick = ()=>{ ['c_ARV','c_Rehab','c_AF'].forEach(id=>$('#'+id).value=''); $('#c_offer').textContent='$0'; $('#c_result').style.display='none'; };
-const CR_PREMIUM = 0.10, CR_DOWN_PCT = 0.10, CR_RATE = 0.02, CR_AM_YEARS = 30, CR_BALLOON_YEARS = 10;
-function pmt(ratePer, nPeriods, principal){ if(ratePer===0) return principal/nPeriods; return principal*ratePer/(1 - Math.pow(1+ratePer,-nPeriods)); }
+
+// Cash
+function calcCash(){const ARV=num($('#c_ARV').value);const rehab=num($('#c_Rehab').value);const AF=Math.max(0,num($('#c_AF').value));const mo=(ARV*0.70)-rehab-AF;$('#c_offer').textContent=fmt(mo);$('#c_result').style.display='block';}
+$('#c_calc').onclick=calcCash;$('#c_clear').onclick=()=>{$('#c_ARV').value='';$('#c_Rehab').value='';$('#c_AF').value='';$('#c_offer').textContent='$0';$('#c_result').style.display='none';};
+
+// Creative Finance
+const CR_PREMIUM=0.10, CR_DOWN_PCT=0.10, CR_RATE=0.02, CR_AM_YEARS=30, CR_BALLOON_YEARS=10;
+function pmt(r,n,p){return r===0?p/n:p*r/(1-Math.pow(1+r,-n));}
 function calcCreative(){
-  const ASK = num($('#cr_ASK').value);
-  const AF = Math.max(0, num($('#cr_AF').value));
-  let price = (ASK * (1 + CR_PREMIUM)) - AF;
-  if(!Number.isFinite(price) || price < 0) price = 0;
-  const down = price * CR_DOWN_PCT;
-  const financed = Math.max(0, price - down);
-  const r = CR_RATE/12, n = CR_AM_YEARS*12;
-  const payment = pmt(r, n, financed);
-  $('#cr_offer').textContent = fmt(price);
-  $('#cr_price').textContent = fmt(price);
-  $('#cr_down').textContent = fmt(down);
-  $('#cr_financed').textContent = fmt(financed);
-  $('#cr_pmt').textContent = fmt(payment);
-  $('#cr_term').textContent = '30 yr amort • 10 yr balloon @ 2%';
-  $('#cr_result').style.display = 'block';
+ const ASK=num($('#cr_ASK').value), AF=num($('#cr_AF').value);
+ let price=(ASK*(1+CR_PREMIUM))-AF; if(price<0||!isFinite(price)) price=0;
+ const down=price*CR_DOWN_PCT, financed=Math.max(0,price-down);
+ const payment=pmt(CR_RATE/12,CR_AM_YEARS*12,financed);
+ $('#cr_offer').textContent=fmt(price);
+ $('#cr_price').textContent=fmt(price);
+ $('#cr_down').textContent=fmt(down);
+ $('#cr_financed').textContent=fmt(financed);
+ $('#cr_pmt').textContent=fmt(payment);
+ $('#cr_result').style.display='block';
 }
-$('#cr_calc').onclick = calcCreative; $('#cr_clear').onclick = ()=>{ ['cr_ASK','cr_AF'].forEach(id=>$('#'+id).value=''); ['cr_offer','cr_price','cr_down','cr_financed','cr_pmt'].forEach(id=>$('#'+id).textContent='$0'); $('#cr_term').textContent='30 yr amort • 10 yr balloon @ 2%'; $('#cr_result').style.display='none'; };
-function calcLand(){const MV = num($('#l_MV').value);const AF = Math.max(0, num($('#l_AF').value));const mo = (MV * 0.40) - AF;$('#l_offer').textContent = fmt(mo);$('#l_result').style.display = 'block';}
-$('#l_calc').onclick = calcLand; $('#l_clear').onclick = ()=>{ ['l_MV','l_AF'].forEach(id=>$('#'+id).value=''); $('#l_offer').textContent='$0'; $('#l_result').style.display='none'; };
-function calcZillow(){const z = num($('#z_zest').value);const mo = z * 0.645;$('#z_offer').textContent = fmt(mo);$('#z_result').style.display = 'block';}
-$('#z_calc').onclick = calcZillow; $('#z_clear').onclick = ()=>{ $('#z_zest').value=''; $('#z_offer').textContent='$0'; $('#z_result').style.display='none'; };
+$('#cr_calc').onclick=calcCreative;$('#cr_clear').onclick=()=>{$('#cr_ASK').value='';$('#cr_AF').value='';$('#cr_offer').textContent='$0';$('#cr_result').style.display='none';};
+
+// Vacant Land
+function calcLand(){const MV=num($('#l_MV').value),AF=num($('#l_AF').value);const mo=(MV*0.40)-AF;$('#l_offer').textContent=fmt(mo);$('#l_result').style.display='block';}
+$('#l_calc').onclick=calcLand;$('#l_clear').onclick=()=>{$('#l_MV').value='';$('#l_AF').value='';$('#l_offer').textContent='$0';$('#l_result').style.display='none';};
+
+// Zillow
+function calcZillow(){const z=num($('#z_zest').value);const mo=z*0.645;$('#z_offer').textContent=fmt(mo);$('#z_result').style.display='block';}
+$('#z_calc').onclick=calcZillow;$('#z_clear').onclick=()=>{$('#z_zest').value='';$('#z_offer').textContent='$0';$('#z_result').style.display='none';};
 </script>
 </body>
 </html>
