@@ -171,7 +171,7 @@ document.querySelectorAll('.tab').forEach(btn=>btn.onclick = ()=>{
 function calcCash(){const ARV=num($('#c_ARV').value);const rehab=num($('#c_Rehab').value);const AF=Math.max(0,num($('#c_AF').value));const mo=(ARV*0.70)-rehab-AF;$('#c_offer').textContent=fmt(mo);$('#c_result').style.display='block';}
 $('#c_calc').onclick=calcCash;$('#c_clear').onclick=()=>{$('#c_ARV').value='';$('#c_Rehab').value='';$('#c_AF').value='';$('#c_offer').textContent='$0';$('#c_result').style.display='none';};
 // Creative Finance
-const CR_PREMIUM=0.10, CR_DOWN_PCT=0.10, CR_RATE=0.02, CR_AM_YEARS=30, CR_BALLOON_YEARS=10;
+const CR_PREMIUM=0.10, CR_DOWN_PCT=0.10, CR_RATE=0, CR_AM_YEARS=30, CR_BALLOON_YEARS=10;
 function pmt(r,n,p){return r===0?p/n:p*r/(1-Math.pow(1+r,-n));}
 function calcCreative(){
  const ASK=num($('#cr_ASK').value), AF=num($('#cr_AF').value);
