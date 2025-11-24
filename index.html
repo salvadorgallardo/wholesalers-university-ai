@@ -117,7 +117,7 @@ footer a:hover{color:#111;background:var(--accent);padding:0 4px;border-radius:6
       <section id="land" class="calc">
         <div class="grid">
           <div>
-            <label>Market Value ($)</label><input type="number" id="l_MV" placeholder="0">
+            <label>New Build ARV ($)</label><input type="number" id="l_MV" placeholder="0">
           </div>
           <div>
             <label>Assignment Fee ($)</label><input type="number" id="l_AF" placeholder="0">
@@ -187,7 +187,7 @@ function calcCreative(){
 }
 $('#cr_calc').onclick=calcCreative;$('#cr_clear').onclick=()=>{$('#cr_ASK').value='';$('#cr_AF').value='';$('#cr_offer').textContent='$0';$('#cr_result').style.display='none';};
 // Land
-function calcLand(){const MV=num($('#l_MV').value),AF=num($('#l_AF').value);const mo=(MV*0.40)-AF;$('#l_offer').textContent=fmt(mo);$('#l_result').style.display='block';}
+function calcLand(){const MV=num($('#l_MV').value),AF=num($('#l_AF').value);const mo=(MV*0.20)-AF;$('#l_offer').textContent=fmt(mo);$('#l_result').style.display='block';}
 $('#l_calc').onclick=calcLand;$('#l_clear').onclick=()=>{$('#l_MV').value='';$('#l_AF').value='';$('#l_offer').textContent='$0';$('#l_result').style.display='none';};
 // Zillow
 function calcZillow(){const z=num($('#z_zest').value);const mo=z*0.645;$('#z_offer').textContent=fmt(mo);$('#z_result').style.display='block';}
